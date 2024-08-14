@@ -37,7 +37,7 @@ class SerialHandler(QObject):
         self.connect_serial_port()
 
     def connect_serial_port(self):
-        for _ in range(3):
+        for _ in range(7):
             try:
                 self.serial_port = serial.Serial(self.port_name, self.baud_rate)
                 time.sleep(2)  #wait for connection to establish
