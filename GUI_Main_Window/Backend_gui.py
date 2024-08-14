@@ -1,7 +1,10 @@
 from Frontend_gui import Ui_MainWindow
 from SerialHandler import SerialHandler, ControlType, Directions, Speed
+from CameraFeed import CameraFeed
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow
+from PyQt6.QtCore import QThreadPool, pyqtSlot
+from PyQt6.QtGui import QPixmap, QImage
 
 
 class MainWindow(QMainWindow):
@@ -14,12 +17,23 @@ class MainWindow(QMainWindow):
         self.serial_handler = SerialHandler(port_name="Bluetooth_COM_port", baud_rate=9600)
         self.serial_handler.readings.connect(self.update_readings)
 
-         #update connectivity indicators
+        #update connectivity indicators
         self.update_connectivity_status()
 
+        #connect signals
         self.ui.Autonomous_Button.clicked.connect(self.set_autonomous_controller)
-        self.ui.Manual_Button.clicked.connect(self.set_manual_control) 
+        self.ui.Manual_Button.clicked.connect(self.set_manual_control)
+        
+        #creating a seperate thread for the camera feed
+        self.camera_feed = CameraFeed()
+        self.camera_feed.video_signal.current_frame.connect(self.update_camera_feed)#connecting QImage signal
+        self.camera_feed_threadpool = QThreadPool()
+        self.camera_feed_threadpool.start(self.camera_feed)#start thread
 
+        #connect signals for screenshot button
+        self.ui.ScreenShot.clicked.connect(self.screenshot_clicked)
+       
+    
         self.show()
         
     
@@ -152,6 +166,27 @@ class MainWindow(QMainWindow):
     def update_connectivity_status(self):
         color = "green" if self.serial_handler.connectivity_status() else "red"
         self.ui.connectivity_indicator.setStyleSheet(f"border-radius: 10px;\nbackground-color: {color};")
+
+
+    @pyqtSlot(QImage)
+    def update_camera_feed(self, image):
+
+        pixmap = QPixmap.fromImage(image)
+        self.ui.CameraFeed.setPixmap(pixmap)
+
+
+    def closeEvent(self, event):
+        #end bluetooth connection with MCU
+        self.serial_handler.stop_connection()
+        #stop the camera feed
+        self.camera_feed.stop()
+        #ensure the thread has finished
+        self.camera_feed_threadpool.waitForDone()
+
+
+    def screenshot_clicked(self):
+        self.camera_feed.capture_screenshot()
+
         
 
 

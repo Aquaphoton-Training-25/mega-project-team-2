@@ -51,8 +51,7 @@ class SerialHandler(QObject):
             if direction is not None:#controlType is Manual
                 """
                 ##direction is a char (1 bytes)
-                self.serial_port.write(direction.to_bytes(1, byteorder='little'))
-                ###byteorder='little' indicates that the least significant byte is stored first
+                self.serial_port.write(direction.encode('utf-8'))
                 """
                 self.receive_signals()
                 ###############################
@@ -60,8 +59,9 @@ class SerialHandler(QObject):
                 ###############################
             elif distance > 0 and speed != '0':#controlType is Autonomous
                 """
-                self.serial_port.write(distance.to_bytes(2, byteorder='little')) #integer is an int (2 bytes)
-                self.serial_port.write(speed.to_bytes(1, byteorder='little')) ##direction is a char (1 bytes)
+                ###byteorder='little' indicates that the least significant byte is stored first
+                # self.serial_port.write(distance.to_bytes(2, byteorder='little')) #integer is an int (2 bytes)
+                self.serial_port.write(speed.encode('utf-8')) ##direction is a char (1 bytes)
                 """
                 self.receive_signals()
                 ###################################
@@ -89,3 +89,7 @@ class SerialHandler(QObject):
 
     def connectivity_status(self):
          return True if self.serial_port else False
+    
+    def stop_connection(self):
+        if self.serial_port:
+            self.serial_port.close()
