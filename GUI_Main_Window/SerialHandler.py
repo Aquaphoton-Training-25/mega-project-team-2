@@ -54,9 +54,7 @@ class SerialHandler(QObject):
                 self.serial_port.write(direction.encode('utf-8'))
                 """
                 self.receive_signals()
-                ###############################
-                print("direction:", direction)# removed later
-                ###############################
+
             elif distance > 0 and speed != '0':#controlType is Autonomous
                 """
                 ###byteorder='little' indicates that the least significant byte is stored first
@@ -64,10 +62,6 @@ class SerialHandler(QObject):
                 self.serial_port.write(speed.encode('utf-8')) ##direction is a char (1 bytes)
                 """
                 self.receive_signals()
-                ###################################
-                print("input distance:", distance)# removed later
-                print("input speed:", speed)      #
-                ###################################
         except Exception:
            print("Error sending signals:", Exception, sep="\n", end="\n\n")
         

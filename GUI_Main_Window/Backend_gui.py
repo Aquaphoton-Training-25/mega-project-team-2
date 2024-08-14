@@ -38,9 +38,6 @@ class MainWindow(QMainWindow):
         
     
     def set_autonomous_controller(self):
-        ###############################
-        print("Autonomous control ON")# removed later
-        ###############################
         self.enable_buttons(control_type=ControlType.AUTONOMOUS, enable=True) #enable promt for speed and distance (autonomous buttons)
         self.enable_buttons(control_type=ControlType.MANUAL, enable=False)#disable forward, backward, right, and left buttons (manual buttons)
         
@@ -48,9 +45,6 @@ class MainWindow(QMainWindow):
         
 
     def set_manual_control(self):
-        ###########################
-        print("Manual control ON")# removed later
-        ###########################
         self.enable_buttons(control_type=ControlType.MANUAL, enable=True) #enable forward, backward, right, and left buttons (manual buttons)
         self.enable_buttons(control_type=ControlType.AUTONOMOUS, enable=False) #disable promt for speed and distance (autonomous buttons)
 
@@ -124,8 +118,8 @@ class MainWindow(QMainWindow):
         self.current_direction = direction.value
                 
 
-
-    def update_readings(self, Ultrasonic, current, voltage):#called when signal is emmited
+    @pyqtSlot(float, float, float)
+    def update_readings(self, Ultrasonic, current, voltage):#excuted when signal is emmited
         #update signals received from arduino
         self.ui.Sonar.setText(f'{Ultrasonic}m')
         self.ui.Current.setText(f'{current}A')

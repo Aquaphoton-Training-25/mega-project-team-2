@@ -12,8 +12,7 @@ class CameraFeed(QRunnable):
     def __init__(self):
         super().__init__()
         self.video_signal = CameraFeedSignals()
-        self._running = True  #flag to control the running state
-        self._mutex = QMutex()  # Mutex to protect the running state
+        self.running_state = True  #flag to control the running state
         self.pic_number = 0
         self.frame = None
         self.screenshoot_frame = None
@@ -28,7 +27,7 @@ class CameraFeed(QRunnable):
             print("Error: Unable to access the camera.")
             return
         
-        while cap.isOpened() and self.is_running():
+        while cap.isOpened() and  self.running_state:
             ret, self.frame = cap.read() #ret indicates success
             if ret:
                 #flip the frame horizontally to overcome selfi camera mirror
@@ -47,16 +46,16 @@ class CameraFeed(QRunnable):
         cap.release()
 
 
-    def stop(self):
-        with QMutexLocker(self._mutex):
-            self._running = False
-
-    def is_running(self):
-        with QMutexLocker(self._mutex):
-            return self._running
-        
-
     def capture_screenshot(self):
         if self.screenshoot_frame is not None:
             self.pic_number +=1
-            cv2.imwrite(fr"D:\git repos\mega-project-team-2\GUI_Main_Window\screenshots\screenshoot{self.pic_number}.jpg", self.screenshoot_frame)
+            cv2.imwrite(f"screenshots/screenshoot{self.pic_number}.jpg", self.screenshoot_frame)    
+
+    
+    def stop(self):
+        self.running_state = False
+
+    
+        
+
+    

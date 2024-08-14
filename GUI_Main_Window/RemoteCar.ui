@@ -429,7 +429,7 @@ border: 2px solid black;
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>forward.png</normaloff>forward.png</iconset>
+      <normaloff>images/forward.png</normaloff>images/forward.png</iconset>
     </property>
    </widget>
    <widget class="QPushButton" name="Right_Button">
@@ -457,7 +457,7 @@ border-radius: 10px;</string>
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>right.png</normaloff>right.png</iconset>
+      <normaloff>images/right.png</normaloff>images/right.png</iconset>
     </property>
    </widget>
    <widget class="QPushButton" name="Left_Button">
@@ -487,7 +487,7 @@ border-radius: 10px;
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>left.png</normaloff>left.png</iconset>
+      <normaloff>images/left.png</normaloff>images/left.png</iconset>
     </property>
    </widget>
    <widget class="QPushButton" name="Backward_Button">
@@ -515,7 +515,7 @@ border-radius: 10px;</string>
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>backward.png</normaloff>backward.png</iconset>
+      <normaloff>images/backward.png</normaloff>images/backward.png</iconset>
     </property>
    </widget>
   </widget>
