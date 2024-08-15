@@ -64,7 +64,7 @@ void manual(){
 }
 
 void autonomous(){
-  long dis = 10; //distance in cm//
+  long dis = 10; //distance in cm
   while(command == autonomous){
     speed();
     ultrasonic();
