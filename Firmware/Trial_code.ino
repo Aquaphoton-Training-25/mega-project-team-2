@@ -162,6 +162,7 @@ void stop(){
   digitalWrite(input2, LOW);
   digitalWrite(input3, LOW);
   digitalWrite(input4, LOW);
+}
 
 void ultrasonic(){
   digitalWrite(trigpin, LOW);
