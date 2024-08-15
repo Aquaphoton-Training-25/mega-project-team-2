@@ -15,7 +15,7 @@ int speed = 0;
 int dis = 100;
 int distance;
 long duration;
-int movement;
+char movement;
 int command;
 
 void setup()
