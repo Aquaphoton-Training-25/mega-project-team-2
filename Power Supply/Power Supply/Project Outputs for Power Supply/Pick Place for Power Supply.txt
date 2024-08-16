@@ -1,0 +1,29 @@
+Altium Designer Pick and Place Locations
+C:\Users\Yaseen PC\Desktop\Altium projects\Power Supply\Power Supply\Project Outputs for Power Supply\Pick Place for Power Supply.txt
+
+========================================================================================================================
+File Design Information:
+
+Date:       16/08/24
+Time:       17:18
+Revision:   Not in VersionControl
+Variant:    No variations
+Units used: mm
+
+Designator Comment             Layer    Footprint         Center-X(mm) Center-Y(mm) Rotation Description 
+VR2        7812                TopLayer REGULATOR7812     12.6900      27.9400      0        ""          
+VR1        7805                TopLayer REGULATOR7805     25.3900      27.9400      0        ""          
+R2         470                 TopLayer RESISTOR          12.7000      12.7000      0        ""          
+R1         82                  TopLayer RESISTOR          25.4000      12.7000      180      ""          
+P3         "TERMINAL BLOCK"    TopLayer TERMINAL_BLOCK    15.2800      5.0800       0        ""          
+P2         "TERMINAL BLOCK"    TopLayer TERMINAL_BLOCK    27.9400      5.0800       0        ""          
+P1         "TERMINAL BLOCK"    TopLayer TERMINAL_BLOCK    25.4000      37.1000      180      ""          
+J1         "POWER JACK SOCKET" TopLayer POWER_JACK_SOCKET 7.6130       37.2295      180      ""          
+D2         LED                 TopLayer LED               3.8100       15.2400      0        ""          
+D1         LED                 TopLayer LED               35.5600      17.7800      0        ""          
+C6         0.1uF               TopLayer CAPACITOR         7.6200       21.5900      90       ""          
+C5         "10 uF"             TopLayer POL_CAP           15.2400      20.3200      90       ""          
+C4         0.1uF               TopLayer CAPACITOR         2.5400       26.6700      270      ""          
+C3         0.1uF               TopLayer CAPACITOR         35.5600      26.6700      270      ""          
+C2         "10 uF"             TopLayer POL_CAP           22.8600      20.3200      90       ""          
+C1         0.1uF               TopLayer CAPACITOR         30.4800      21.5900      90       ""          
