@@ -1,6 +1,7 @@
 from Frontend_gui import Ui_MainWindow
 from SerialHandler import SerialHandler, ControlType, Directions, Speed
 from CameraFeed import CameraFeed
+from task2Backend import StereoVision
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtCore import QThreadPool, pyqtSlot,QThread
@@ -30,9 +31,12 @@ class MainWindow(QMainWindow):
         self.camera_feed_threadpool = QThreadPool()
         self.camera_feed_threadpool.start(self.camera_feed)#start thread
 
-        #connect signals for screenshot button
+         #connect signals for screenshot button
         self.ui.ScreenShot.clicked.connect(self.screenshot_clicked)
+        #connect signals for CV tasks
         self.ui.CV_task1.clicked.connect(self.open_sub_window_task1)
+        self.ui.CV_task2.clicked.connect(self.open_sub_window_task2)
+    
     
         self.show()
         
@@ -40,6 +44,11 @@ class MainWindow(QMainWindow):
     # Create and show the subwindow directly on the main thread
         self.sub_window = Task1_Backend.Task1_SubWindow()
         self.sub_window.show()
+
+
+    def open_sub_window_task2(self):
+        StereoVision()
+
 
     def set_autonomous_controller(self):
         self.enable_buttons(control_type=ControlType.AUTONOMOUS, enable=True) #enable promt for speed and distance (autonomous buttons)
