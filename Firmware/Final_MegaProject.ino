@@ -123,14 +123,11 @@ void autonomous() {
         
         if (output > 0) {
             
+            SPD();
             left();
-            analogWrite(enable1, constrain(255 - abs(output), 0, 255));
-            analogWrite(enable2, constrain(255 - abs(output), 0, 255));
         } else {
-            
+            SPD();
             right();
-            analogWrite(enable1, constrain(255 + abs(output), 0, 255));
-            analogWrite(enable2, constrain(255 + abs(output), 0, 255));
         }
 
         if (Serial.available() > 0) {
@@ -143,6 +140,7 @@ void autonomous() {
 }
 
 void SPD() {
+  speed = Serial.read();
     switch (speed) {
         case 0:
             analogWrite(enable1, 0);
