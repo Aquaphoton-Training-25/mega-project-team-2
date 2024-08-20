@@ -81,7 +81,7 @@ class DepthMap(GroundTruth):
 
 
     def compute_essentialmatrix(self):
-        self.E = np.dot(self.K2.T, np.dot(self.F, self.K1))
+        self.E = np.dot(np.dot(self.K2.T, self.F), self.K1)
 
 
     def decompose_essentialmatrix(self):
